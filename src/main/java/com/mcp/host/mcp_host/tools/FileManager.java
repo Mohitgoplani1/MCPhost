@@ -5,6 +5,9 @@ import com.mcp.host.mcp_host.model.MCPResponse;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -21,8 +24,66 @@ public class FileManager {
                 return deleteFile(parameters.get("path"));
             case "openFile":
                 return openFile(parameters.get("path"));
+            case "moveFile":
+                return moveFile(parameters.get("source"),parameters.get("destination"));
+            case "createFolder":
+                return createFolder(parameters.get("path"),parameters.get("fileName"));
+            case "copyFile":
+                return copyFile(parameters.get("source"),parameters.get("destination"));
             default:
                 return new MCPResponse("error","Unknown File Manager Action");
+        }
+    }
+
+    // tool to create the folder int the given location
+    private static MCPResponse createFolder(String path, String fileName) {
+        try {
+            Path folderPath = Paths.get(path, fileName);
+            File folder = folderPath.toFile();
+
+            if (folder.exists() && folder.isDirectory()) {
+                return new MCPResponse("error", "Folder already exists!");
+            }
+
+            Files.createDirectory(folderPath);
+            return new MCPResponse("success", "Folder created successfully!");
+        } catch (Exception e) {
+            return new MCPResponse("error", e.getMessage());
+        }
+    }
+
+    // tool to copy the file from one place to another
+    private static MCPResponse copyFile(String source, String destination){
+        try {
+            File sourceFile=new File(source);
+            File destFile=new File(destination);
+            if(!sourceFile.exists() || !sourceFile.isFile()){
+                return new MCPResponse("error","No Source File found !");
+            }
+            if(destFile.exists())
+                return new MCPResponse("error","File Already exist at destination");
+            Files.copy(sourceFile.toPath(),destFile.toPath());
+            return new MCPResponse("success","File Copied Successfully !");
+        } catch (IOException e) {
+            return new MCPResponse("error",e.getMessage());
+        }
+    }
+
+    //tool to move the file from one location to another
+    private static MCPResponse moveFile(String source, String destination){
+        File sourceFile=new File(source);
+        File destFile=new File(destination);
+        if(!sourceFile.exists()){
+            return new MCPResponse("error","Defined paths are wrong !");
+        }
+        if(destFile.exists())
+            return new MCPResponse("error","File Already Exists at the destination");
+        try{
+            Files.move(sourceFile.toPath(),destFile.toPath());
+            return new MCPResponse("success","File moved Successfully !");
+        }
+        catch (Exception e){
+            return new MCPResponse("error",e.getMessage());
         }
     }
 
@@ -58,7 +119,7 @@ public class FileManager {
             }
             Desktop desktop=Desktop.getDesktop();
             if(!desktop.isSupported(Desktop.Action.OPEN)){
-                return new MCPResponse("error","fileopening is not supported");
+                return new MCPResponse("error","file opening is not supported");
             }
             desktop.open(file);
             return new MCPResponse("success","File Launch Successful ");

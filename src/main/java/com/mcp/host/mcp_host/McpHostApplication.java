@@ -19,10 +19,11 @@ public class McpHostApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception{
 		String jsonInput= """
 				{
-				"tool":"NetworkingCommand",
-				"action":"network",
+				"tool":"FileManager",
+				"action":"copyFile",
 				"parameters":{
-					"command":"nmap 172.16.217.28"
+					"source":"C:/Users/hp/Downloads/final.pdf",
+					"destination":"C:/Users/hp/Desktop/final.pdf"
 				}
 				}
 				""";
