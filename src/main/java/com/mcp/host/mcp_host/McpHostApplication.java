@@ -19,11 +19,11 @@ public class McpHostApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception{
 		String jsonInput= """
 				{
-				"tool":"FileManager",
-				"action":"copyFile",
+				"tool":"MediaTool",
+				"action":"openImage",
 				"parameters":{
-					"source":"C:/Users/hp/Downloads/final.pdf",
-					"destination":"C:/Users/hp/Desktop/final.pdf"
+					"path":"C:/Users/hp/Desktop/",
+					"fileName":"demo"
 				}
 				}
 				""";
