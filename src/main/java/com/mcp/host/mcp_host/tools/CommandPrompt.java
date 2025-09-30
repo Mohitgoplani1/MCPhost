@@ -15,9 +15,9 @@ public class CommandPrompt {
 
         switch (action){
 
-            case "Independent":
+            case "independent":
                 return execIndependent(parameters.get("command"));
-            case "Dependent":
+            case "dependent":
                 return execDependent(parameters.get("path"), parameters.get("command"));
             default:
                 return new MCPResponse("error","Unknown Command Execution");
