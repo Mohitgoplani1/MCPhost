@@ -14,7 +14,7 @@ import java.util.Map;
 public class FileManager {
 
     // function to dispatch the tool according to action
-    public static MCPResponse handleAction(String action, Map<String,String> parameters){
+    public static MCPResponse handleFileAction(String action, Map<String,String> parameters){
         switch (action){
             case "listFiles":
                 return listFiles(parameters.get("path"));

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ApplicationLauncher {
-    public static MCPResponse start(String action, Map<String,String> parameters){
+    public static MCPResponse handleApplicationAction(String action, Map<String,String> parameters){
         switch(action){
 
             case "openApplication":

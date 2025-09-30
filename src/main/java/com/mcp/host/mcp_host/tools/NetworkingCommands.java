@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class NetworkingCommands {
-    public static MCPResponse execute(String action, Map<String,String> parameters){
+    public static MCPResponse handleNetworkingAction(String action, Map<String,String> parameters){
         switch(action){
             case "network":
                 return execNetworking(parameters.get("command"));

@@ -9,19 +9,21 @@ public class MCPHost {
         switch(request.tool){
 
             case "FileManager":
-                return FileManager.handleAction(request.action,request.parameters);
+                return FileManager.handleFileAction(request.action,request.parameters);
 
             case "ApplicationLauncher":
-                return ApplicationLauncher.start(request.action,request.parameters);
+                return ApplicationLauncher.handleApplicationAction(request.action,request.parameters);
 
             case "CommandPrompt":
-                return CommandPrompt.execute(request.action,request.parameters);
+                return CommandPrompt.handleCommandAction(request.action,request.parameters);
 
             case "NetworkingCommand" :
-                return NetworkingCommands.execute(request.action,request.parameters);
+                return NetworkingCommands.handleNetworkingAction(request.action,request.parameters);
 
             case "MediaTool":
-                return MediaTool.handleMedia(request.action,request.parameters);
+                return MediaTool.handleMediaAction(request.action,request.parameters);
+            case "Browser":
+                return Browser.handleBrowserAction(request.action,request.parameters);
 
             default:
                 return new MCPResponse("error","Unknown tool : "+request.tool);

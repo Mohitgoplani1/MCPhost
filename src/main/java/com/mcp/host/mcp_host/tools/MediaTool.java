@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MediaTool {
-    public static MCPResponse handleMedia(String action, Map<String, String> parameters){
+    public static MCPResponse handleMediaAction(String action, Map<String, String> parameters){
         switch(action){
             case "playMedia":
                 return playMedia(parameters.get("path"));

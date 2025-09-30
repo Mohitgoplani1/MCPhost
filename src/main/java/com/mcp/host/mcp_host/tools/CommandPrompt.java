@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CommandPrompt {
-    public static MCPResponse execute(String action, Map<String,String> parameters){
+    public static MCPResponse handleCommandAction(String action, Map<String,String> parameters){
 
         switch (action){
 
